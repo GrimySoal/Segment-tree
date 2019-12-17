@@ -1,14 +1,19 @@
 package SegmentTree;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class SegmentTree {
     private Double[] arrayOfSums;
 
-    public SegmentTree(ArrayList<Double> array) {
-        arrayOfSums = new Double[array.size() * 4];
-        CreateSegmentsTree(array, 1);
+    public SegmentTree(List<? extends Number> list){
+        arrayOfSums = new Double[list.size() * 4];
+        CreateSegmentsTree(list.stream().map(Number::doubleValue).collect(Collectors.toList()), 1);
+    }
+
+    public SegmentTree(Number[] array) {
+        arrayOfSums = new Double[array.length * 4];
+        CreateSegmentsTree(Arrays.stream(array).map(Number::doubleValue).collect(Collectors.toList()), 1);
     }
 
     private double CreateSegmentsTree(List<Double> subList, int index) {
